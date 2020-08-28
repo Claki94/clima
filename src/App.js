@@ -22,8 +22,8 @@ function App() {
   // Funcion asíncrona que hace la petición GET a la API para obtener el resultado
   const consultarAPI = async () => {
     const appId = 'fc4e3f364f06ee7e9e12eef1527d0e2f';
-    let url = `http://api.openweathermap.org/data/2.5/weather?q=${ciudad},${pais}&appid=${appId}`;
-
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${ciudad},${pais}&appid=${appId}`;
+    
     let respuesta = await fetch(url);
     let resultado = await respuesta.json();
 
@@ -44,7 +44,7 @@ function App() {
     if(consultar) {
       consultarAPI();
     }
-
+    //eslint-disable-next-line
   }, [consultar]);
 
   // Si hay un error creamos un componente de error
