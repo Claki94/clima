@@ -3,6 +3,7 @@ import React, {Fragment, useState, useEffect} from 'react';
 import Header from './components/Header';
 import Formulario from './components/Formulario';
 import Clima from './components/Clima';
+import Error from './components/Error';
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
   });
   const [consultar, guardarConsultar] = useState(false);
   const [resultado, guardarResultado] = useState({});
+  const [error, guardarError] = useState(false);
 
   // Destructuring de la busqueda para facilitar su lectura
   const {ciudad, pais} = busqueda;
@@ -27,6 +29,13 @@ function App() {
 
     guardarResultado(resultado);
     guardarConsultar(false);
+
+    // Detecto si hubo resultados correctos en la consulta
+    if(resultado.cod === '404') {
+      guardarError(true);
+    } else {
+      guardarError(false)
+    }
   }
 
   // Hook que se ejecuta cada vez que se modifica el state de consultar (si este es true)
@@ -37,6 +46,9 @@ function App() {
     }
 
   }, [consultar]);
+
+  // Si hay un error creamos un componente de error
+  let componente = (error) ? <Error mensaje="No hay resultados disponibles" /> : <Clima resultado={resultado} />;
 
   return (
     <Fragment>
@@ -55,9 +67,7 @@ function App() {
                 />
               </div>
               <div className="col m6 s12">
-                <Clima 
-                  resultado={resultado}
-                />
+                {componente}
               </div>
             </div>
           </div>
