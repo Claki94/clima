@@ -21,7 +21,7 @@ function App() {
 
   // Funcion asíncrona que hace la petición GET a la API para obtener el resultado
   const consultarAPI = async () => {
-    const appId = 'fc4e3f364f06ee7e9e12eef1527d0e2f';
+    const appId = ''; // Introduce tu API ID desde tu cuenta de usuario de openweathermap
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${ciudad},${pais}&appid=${appId}`;
     
     let respuesta = await fetch(url);
